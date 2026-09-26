@@ -11,7 +11,7 @@ export default function MyPlanPage() {
   const [activeTab, setActiveTab] = useState("plan");
   const [sortBy, setSortBy] = useState("duration"); // New: Sort state
   const [isLoading, setIsLoading] = useState(false); // New: Loading state (set to true to test, or pull from context)
-  
+
   const { planItems, savedItems, removeFromPlan, removeFromSaved, markAsDone, markAsUndone } = usePlan();
 
   const workouts = activeTab === "plan" ? planItems : savedItems;
@@ -37,6 +37,16 @@ export default function MyPlanPage() {
     } else {
       removeFromSaved(id);
       toast.error(`${name} removed from saved!`);
+    }
+  }
+
+  function handleToggleDone(id, name, isDone) {
+    if (isDone) {
+      markAsUndone(id);
+      toast.info(`${name} marked as undone`);
+    } else {
+      markAsDone(id);
+      toast.success(`${name} marked as done! 💪`);
     }
   }
 
@@ -66,22 +76,20 @@ export default function MyPlanPage() {
 
         {/* 3. Header Bar: Tabs + Sort */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 mb-6 bg-gray-900/50 p-2 rounded-xl border border-gray-800">
-          
+
           {/* Left: Tabs */}
           <div className="flex bg-gray-950 rounded-lg p-1 w-full sm:w-auto">
-            <button 
+            <button
               onClick={() => setActiveTab("plan")}
-              className={`flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-medium transition-colors cursor-pointer ${
-                activeTab === "plan" ? "bg-gray-800 text-white" : "text-gray-400 hover:text-white"
-              }`}
+              className={`flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-medium transition-colors cursor-pointer ${activeTab === "plan" ? "bg-gray-800 text-white" : "text-gray-400 hover:text-white"
+                }`}
             >
               Today's Plan
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab("saved")}
-              className={`flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-medium transition-colors cursor-pointer ${
-                activeTab === "saved" ? "bg-gray-800 text-white" : "text-gray-400 hover:text-white"
-              }`}
+              className={`flex-1 sm:flex-none px-4 py-1.5 rounded-md text-sm font-medium transition-colors cursor-pointer ${activeTab === "saved" ? "bg-gray-800 text-white" : "text-gray-400 hover:text-white"
+                }`}
             >
               Saved
             </button>
@@ -90,7 +98,7 @@ export default function MyPlanPage() {
           {/* Right: Sort By */}
           <div className="flex items-center gap-2 text-sm w-full sm:w-auto justify-between sm:justify-end">
             <span className="text-gray-400">Sort by</span>
-            <select 
+            <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
               className="bg-gray-800 text-white px-3 py-1.5 rounded-lg border border-gray-700 outline-none focus:border-lime-400 cursor-pointer"
@@ -109,7 +117,7 @@ export default function MyPlanPage() {
           {isLoading ? (
             <p className="text-gray-400 text-center py-12 animate-pulse">Loading workouts…</p>
           ) : workouts.length === 0 ? (
-            
+
             /* Empty State */
             <div className="text-center py-16 bg-gray-900 rounded-xl border border-gray-800">
               <h3 className="text-xl font-bold uppercase text-gray-300">NOTHING HERE YET</h3>
@@ -121,15 +129,15 @@ export default function MyPlanPage() {
               </Link>
             </div>
           ) : (
-            
+
             /* Workout Cards List (Now uses sortedWorkouts) */
             <div className="space-y-3">
               {sortedWorkouts.map((w) => (
                 <div key={w.id} className="bg-gray-900 p-4 rounded-xl flex items-center gap-4 border border-gray-800 hover:border-gray-700 transition-colors">
-                  
+
                   {/* Thumbnail */}
                   <img src={w.image} alt={w.name} className="w-16 h-16 rounded-lg object-cover bg-gray-800 flex-shrink-0" />
-                  
+
                   {/* Info */}
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold uppercase text-white text-sm truncate">{w.name}</h3>
@@ -150,13 +158,25 @@ export default function MyPlanPage() {
                     </Link>
                     {activeTab === "plan" && (
                       <button
-                        onClick={() => (w.done ? markAsUndone(w.id) : markAsDone(w.id))}
-                        className={`text-xs px-3 py-1.5 rounded font-bold transition-colors ${
-                          w.done
+                        onClick={() => handleToggleDone(w.id, w.name, w.done)}
+                        className={`text-xs px-3 py-1.5 rounded font-bold transition-colors flex items-center gap-1.5 ${w.done
                             ? "bg-lime-700 text-gray-300 hover:bg-lime-600"
                             : "bg-lime-400 text-gray-900 hover:bg-lime-300"
-                        }`}
+                          }`}
                       >
+                        <svg
+                          className="w-3.5 h-3.5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2.5}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
                         {w.done ? "Done" : "Mark as Done"}
                       </button>
                     )}

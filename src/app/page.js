@@ -8,7 +8,6 @@ export default function Home() {
   return (
     <div>
       <Banner />
-      <Library></Library>
     </div>
   )
 }
