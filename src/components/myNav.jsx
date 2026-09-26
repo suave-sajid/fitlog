@@ -3,12 +3,16 @@ import logo from "@/assets/logo.png"
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { usePlan } from "@/context/PlanContext";
+
 
 
 // components/Navbar.jsx
 export default function Navbarr() {
 
   const pathname = usePathname();
+    const { planItems, savedItems } = usePlan();
+
   
   return (
     <nav className="sticky top-0 z-100 bg-gray-950 border-b border-gray-800 px-6 py-4">
@@ -64,7 +68,7 @@ export default function Navbarr() {
           <div className="flex items-center gap-2">
             <span className="text-gray-300 text-sm">Plan</span>
             <span className="bg-lime-400 text-gray-900 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-              0
+              {planItems.length}
             </span>
           </div>
 
@@ -72,7 +76,7 @@ export default function Navbarr() {
           <div className="flex items-center gap-2">
             <span className="text-gray-400 text-sm">Saved</span>
             <span className="bg-gray-700 text-gray-300 text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-              0
+              {savedItems.length}
             </span>
           </div>
         </div>
