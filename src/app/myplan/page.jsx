@@ -4,6 +4,8 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { usePlan } from "@/context/PlanContext";
+import { toast } from "react-toastify";
+
 
 export default function MyPlanPage() {
   const [activeTab, setActiveTab] = useState("plan");
@@ -28,11 +30,13 @@ export default function MyPlanPage() {
   const totalMinutes = planItems.reduce((sum, w) => sum + w.duration, 0);
   const totalCalories = planItems.reduce((sum, w) => sum + w.caloriesBurned, 0);
 
-  function handleRemove(id) {
+  function handleRemove(id, name) {
     if (activeTab === "plan") {
       removeFromPlan(id);
+      toast.error(`${name} removed from today's plan!`);
     } else {
       removeFromSaved(id);
+      toast.error(`${name} removed from saved!`);
     }
   }
 
@@ -157,7 +161,7 @@ export default function MyPlanPage() {
                       </button>
                     )}
                     <button
-                      onClick={() => handleRemove(w.id)}
+                      onClick={() => handleRemove(w.id, w.name)}
                       className="text-xs text-red-400 hover:text-red-300 px-2 py-1.5 rounded hover:bg-red-900/20 transition-colors"
                       title="Remove"
                     >

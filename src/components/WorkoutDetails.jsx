@@ -1,11 +1,22 @@
 "use client";
 import { usePlan } from "@/context/PlanContext";
 import Image from "next/image";
+import { toast } from "react-toastify";
+
 
 // components/WorkoutDetailsPage.jsx
 export default function WorkoutDetails({ workout }) {
 
   const { addToPlan, addToSaved } = usePlan();
+
+  function handleAddToPlan() {
+    addToPlan(workout);
+    toast.success(`${workout.name} added to today's plan!`);
+  }
+  function handleAddToSaved() {
+    addToSaved(workout);
+    toast.success(`${workout.name} added to saved!`);
+  }
 
   return (
     <div className="min-h-screen bg-gray-950 p-4 md:p-8">
@@ -155,7 +166,7 @@ export default function WorkoutDetails({ workout }) {
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 {/* Primary Button */}
                 <button 
-                onClick={ () => addToPlan(workout)}
+                onClick={ handleAddToPlan}
                 className="flex-1 bg-lime-400 text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-lime-300 transition-colors flex items-center justify-center gap-2 cursor-pointer">
                   <svg
                     className="w-5 h-5"
@@ -175,7 +186,7 @@ export default function WorkoutDetails({ workout }) {
 
                 {/* Secondary Button */}
                 <button 
-                onClick={ () => addToSaved(workout)}
+                onClick={ handleAddToSaved}
                 className="flex-1 bg-gray-800 text-gray-200 font-semibold px-6 py-3.5 rounded-xl hover:bg-gray-700 transition-colors flex items-center justify-center gap-2 cursor-pointer border border-gray-700">
                   <svg
                     className="w-5 h-5"
