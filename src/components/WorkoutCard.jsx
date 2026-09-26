@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 // components/WorkoutCard.jsx
 export default function WorkoutCard({workout}) {
@@ -9,9 +10,11 @@ export default function WorkoutCard({workout}) {
       <div className="relative h-48 overflow-hidden">
         <Image
           src={workout.image}
+          
           alt={workout.name}
-          fill
-          sizes="(max-width: 640px) 100vw, 384px"
+         
+          width={500}
+      height={500}
           className="object-cover"
         />
       </div>
@@ -68,12 +71,12 @@ export default function WorkoutCard({workout}) {
         </div>
 
            {/* See Details Button */}
-        <button
-          type="button"
-          className="w-full mt-1 bg-lime-500 hover:bg-lime-400 active:bg-lime-500 text-gray-900 font-bold text-sm py-2.5 rounded-xl uppercase tracking-wide transition-colors"
-        >
-          See Details
-        </button>
+        <Link
+        href={`/workouts/${workout.id}`}
+        className="w-full mt-1 bg-lime-400 hover:bg-lime-300 active:bg-lime-500 text-gray-900 font-bold text-sm py-2.5 rounded-xl uppercase tracking-wide transition-colors flex items-center justify-center"
+      >
+        See Details
+      </Link>
 
       </div>
     </div>

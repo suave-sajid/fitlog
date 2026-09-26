@@ -1,11 +1,17 @@
+"use client"
 import logo from "@/assets/logo.png"
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 
 // components/Navbar.jsx
 export default function Navbarr() {
+
+  const pathname = usePathname();
+  
   return (
-    <nav className="bg-gray-950 border-b border-gray-800 px-6 py-4">
+    <nav className="sticky top-0 z-100 bg-gray-950 border-b border-gray-800 px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         {/* Left Side - Logo */}
@@ -23,18 +29,33 @@ export default function Navbarr() {
 
         {/* Center - Navigation Links */}
         <div className="flex items-center gap-2">
-          {/* Active Link */}
+          
+          {/* Workouts Link */}
           <Link 
-          href='/workouts'
-          className="bg-gray-800 text-lime-400 px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer">
+            href="/workouts"
+            // Conditional classes: if pathname matches, apply active styles
+            className={`px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-colors ${
+              pathname.startsWith("/workouts") 
+                ? "bg-gray-800 text-lime-400" 
+                : "text-gray-400 hover:text-white"
+            }`}
+          >
             Workouts
           </Link>
-          {/* Inactive Link */}
+
+          {/* My Plan Link */}
           <Link
-          href='/myplan'
-          className="text-gray-400 px-4 py-1.5 text-sm font-medium hover:text-white transition-colors cursor-pointer">
+            href="/myplan"
+            // Conditional classes: if pathname matches, apply active styles
+            className={`px-4 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-colors ${
+              pathname.startsWith("/myplan") 
+                ? "bg-gray-800 text-lime-400" 
+                : "text-gray-400 hover:text-white"
+            }`}
+          >
             My Plan
           </Link>
+
         </div>
 
         {/* Right Side - Plan & Saved */}

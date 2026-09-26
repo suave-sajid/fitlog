@@ -1,10 +1,14 @@
+import Banner from '@/components/Banner';
+import Library from '@/components/Library';
 import React from 'react';
 
 const WorkoutsPage = () => {
     return (
-        <div>
-            work out page
-        </div>
+        <>
+            <Banner></Banner>
+            <Library> </Library>
+
+        </>
     );
 };
 
