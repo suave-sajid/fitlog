@@ -1,10 +1,17 @@
+import { Bebas_Neue } from "next/font/google";
+
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import banner from "@/assets/banner.png";
 
+const bebasNeue = Bebas_Neue({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 const Banner = () => {
-    return (
-        
+  return (
+
     <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
       {/* Main Card Container */}
       <div className="bg-gray-900 rounded-2xl p-8 md:p-12 max-w-6xl w-full flex flex-col md:flex-row items-center gap-8">
@@ -18,7 +25,7 @@ const Banner = () => {
           </p>
 
           {/* Main Heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+          <h1 className={`${bebasNeue.className} text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight`}>
             TRAIN WITH INTENT. LOG EVERY SET.
           </h1>
 
@@ -30,7 +37,11 @@ const Banner = () => {
 
           {/* Button */}
           <button className="bg-lime-400 text-gray-900 font-bold px-6 py-3 rounded-lg hover:bg-lime-300 transition-colors cursor-pointer">
-            BROWSE WORKOUTS
+            <Link
+              href="#library"
+            >
+              BROWSE WORKOUTS
+            </Link>
           </button>
 
         </div>
@@ -49,8 +60,8 @@ const Banner = () => {
     </div>
   );
 }
-     
-  
+
+
 
 
 export default Banner;

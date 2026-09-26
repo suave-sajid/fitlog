@@ -1,20 +1,22 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
-// components/WorkoutCard.jsx
-export default function WorkoutCard({workout}) {
-  
+
+export default function WorkoutCard({ workout }) {
+
 
   return (
-<div className="w-full max-w-sm mx-auto bg-gray-900 rounded-2xl overflow-hidden shadow-xl">      {/* Image Section */}
+    <div className="w-full max-w-sm mx-auto bg-gray-900 rounded-2xl overflow-hidden shadow-xl">      {/* Image Section */}
       <div className="relative h-48 overflow-hidden">
         <Image
           src={workout.image}
-          
+
           alt={workout.name}
-         
+
           width={500}
-      height={500}
+          height={500}
           className="object-cover"
         />
       </div>
@@ -70,13 +72,19 @@ export default function WorkoutCard({workout}) {
           </div>
         </div>
 
-           {/* See Details Button */}
+        {/* See Details Button */}
         <Link
-        href={`/workouts/${workout.id}`}
-        className="w-full mt-1 bg-lime-400 hover:bg-lime-300 active:bg-lime-500 text-gray-900 font-bold text-sm py-2.5 rounded-xl uppercase tracking-wide transition-colors flex items-center justify-center"
-      >
-        See Details
-      </Link>
+          href={`/workouts/${workout.id}`}
+        >
+          <button
+            onClick={() => toast.info('See Details page')}
+            className="w-full mt-1 cursor-pointer bg-lime-400 hover:bg-lime-300 active:bg-lime-500 text-gray-900 font-bold text-sm py-2.5 rounded-xl uppercase tracking-wide transition-colors flex items-center justify-center"
+
+          >
+
+            See Details
+          </button>
+        </Link>
 
       </div>
     </div>

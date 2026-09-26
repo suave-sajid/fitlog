@@ -1,4 +1,3 @@
-// app/my-plan/page.jsx
 "use client";
 
 import { useState, useMemo } from "react";
@@ -160,8 +159,8 @@ export default function MyPlanPage() {
                       <button
                         onClick={() => handleToggleDone(w.id, w.name, w.done)}
                         className={`text-xs px-3 py-1.5 rounded font-bold transition-colors flex items-center gap-1.5 ${w.done
-                            ? "bg-lime-700 text-gray-300 hover:bg-lime-600"
-                            : "bg-lime-400 text-gray-900 hover:bg-lime-300"
+                          ? "bg-lime-700 text-gray-300 hover:bg-lime-600"
+                          : "bg-lime-400 text-gray-900 hover:bg-lime-300"
                           }`}
                       >
                         <svg

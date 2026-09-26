@@ -1,5 +1,6 @@
 import { Suspense, use } from 'react';
 import WorkoutCard from './WorkoutCard';
+import LoadingSpinner from './LoadingSpinner';
 
 const WORKOUTS_API = 'https://api.abcz.workers.dev/api/fitlog';
 
@@ -15,18 +16,18 @@ async function getWorkouts() {
     return res.json();
 }
 
-// Next.js does not cache fetch requests by default, so the promise is created once,
-// outside the component. React's `use` needs the *same* promise on every render --
-// creating it inside the component would start a new request each time.
 const workoutsPromise = getWorkouts();
 
 const LibraryList = () => {
     const workouts = use(workoutsPromise);
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div
+            id="library"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+        >
             {workouts.map((workout) => (
-                <WorkoutCard key={workout.id} workout ={workout}></WorkoutCard>
+                <WorkoutCard key={workout.id} workout={workout}></WorkoutCard>
             ))}
         </div>
     );
@@ -38,7 +39,7 @@ const Library = () => {
             <h1 className="text-5xl text-center">THE LIBRARY</h1>
             <p className="text-center my-2">Twelve lifts covering every major muscle group</p>
 
-            <Suspense fallback={<p>Loading workouts...</p>}>
+            <Suspense fallback={<LoadingSpinner />}>
                 <LibraryList />
             </Suspense>
         </div>

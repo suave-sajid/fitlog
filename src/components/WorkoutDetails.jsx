@@ -4,7 +4,6 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 
 
-// components/WorkoutDetailsPage.jsx
 export default function WorkoutDetails({ workout }) {
 
   const { addToPlan, addToSaved } = usePlan();
@@ -165,9 +164,9 @@ export default function WorkoutDetails({ workout }) {
               {/* Call-to-Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 {/* Primary Button */}
-                <button 
-                onClick={ handleAddToPlan}
-                className="flex-1 bg-lime-400 text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-lime-300 transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                <button
+                  onClick={handleAddToPlan}
+                  className="flex-1 bg-lime-400 text-gray-900 font-bold px-6 py-3.5 rounded-xl hover:bg-lime-300 transition-colors flex items-center justify-center gap-2 cursor-pointer">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -185,9 +184,9 @@ export default function WorkoutDetails({ workout }) {
                 </button>
 
                 {/* Secondary Button */}
-                <button 
-                onClick={ handleAddToSaved}
-                className="flex-1 bg-gray-800 text-gray-200 font-semibold px-6 py-3.5 rounded-xl hover:bg-gray-700 transition-colors flex items-center justify-center gap-2 cursor-pointer border border-gray-700">
+                <button
+                  onClick={handleAddToSaved}
+                  className="flex-1 bg-gray-800 text-gray-200 font-semibold px-6 py-3.5 rounded-xl hover:bg-gray-700 transition-colors flex items-center justify-center gap-2 cursor-pointer border border-gray-700">
                   <svg
                     className="w-5 h-5"
                     fill="none"
