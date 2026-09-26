@@ -18,17 +18,21 @@ export default function Navbarr() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         {/* Left Side - Logo */}
-        <div className="flex items-center gap-2">
-          {/* Dumbbell Icon */}
-          <Image
-            src={logo}
-            className="w-6 h-auto"
-            alt="logo"
-          />
-          <span className="text-white font-bold text-lg tracking-wide">
-            FITLOG
-          </span>
-        </div>
+        <Link href='/'>
+          <div className="flex items-center gap-2">
+            {/* Dumbbell Icon */}
+
+            <Image
+              src={logo}
+              className="w-6 h-auto"
+              alt="logo"
+            />
+            <span className="text-white font-bold text-lg tracking-wide">
+              FITLOG
+            </span>
+          </div>
+        </Link>
+
 
         {/* Center - Navigation Links */}
         <div className="flex items-center gap-2">
@@ -84,5 +88,5 @@ export default function Navbarr() {
 
       </div>
     </nav>
-  );
+  )
 }
