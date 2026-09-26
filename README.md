@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#  FitLog
 
-## Getting Started
+FitLog is a workout discovery and daily planning app built with Next.js. Browse a library of exercises, view detailed instructions for each move, and build a focused daily plan — capped at five lifts a day to keep training sustainable and intentional.
 
-First, run the development server:
+## Technologies Used
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js (App Router)** — routing, server components, and dynamic `[id]` routes for workout details
+- **React** — client components, hooks (`useState`, `useEffect`, `useContext`)
+- **React Context API** — global state management for the daily plan and saved workouts, shared across routes via the root layout
+- **Tailwind CSS** — utility-first styling with a dark, high-contrast theme
+- **react-toastify** — toast notifications for user actions (add, remove, mark as done)
+- **next/image** — optimized image loading for workout thumbnails and detail banners
+- **Cloudflare Workers (REST API)** — external data source powering the workout library
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. **Workout Library** — Browse a responsive grid of exercises, each shown as a card with muscle group tags, equipment, duration, calories burned, and rating.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Detailed Workout Pages** — Every workout has its own dynamic route (`/workouts/[id]`) with a full breakdown: description, difficulty, sets/reps, and step-by-step instructions.
 
-## Learn More
+3. **Today's Plan (5-Lift Cap)** — Add workouts to a daily plan capped at five lifts, with live totals for exercises, minutes, and calories that update instantly as the plan changes.
 
-To learn more about Next.js, take a look at the following resources:
+4. **Save for Later** — Bookmark workouts to a separate "Saved" list to revisit without committing them to today's plan, accessible via tabs on the My Plan page.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **Real-Time State Sync** — Plan and saved counts update instantly across the Navbar and My Plan page the moment an action happens, thanks to shared React Context — no reloads or manual refresh needed, with toast feedback confirming every add, remove, and done/undone action.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Built as a self-directed full-stack learning project.*

@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbarr from "@/components/myNav";
+import Footer from "@/components/Footer";
 import { PlanProvider } from "@/context/PlanContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
             autoClose={2000}
           />
         </PlanProvider>
+        <Footer />
       </body>
     </html>
   );

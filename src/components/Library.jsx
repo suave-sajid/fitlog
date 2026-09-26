@@ -34,7 +34,7 @@ const LibraryList = () => {
 
 const Library = () => {
     return (
-        <div className='container mx-auto '>
+        <div className='container mx-auto py-8 bg-gray-700/20 rounded-lg border border-gray-800'>
             <h1 className="text-5xl text-center">THE LIBRARY</h1>
             <p className="text-center my-2">Twelve lifts covering every major muscle group</p>
 
