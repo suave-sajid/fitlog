@@ -1,7 +1,8 @@
 import WorkoutDetails from "@/components/WorkoutDetails";
 import { notFound } from "next/navigation";
 
-const WORKOUTS_API = "https://api.abcz.workers.dev/api/fitlog";
+// const WORKOUTS_API = "https://api.abcz.workers.dev/api/fitlog";
+const WORKOUTS_API = "https://api.api-store.workers.dev/api/fitlog";
 
 async function getWorkout(id) {
   const res = await fetch(WORKOUTS_API, {

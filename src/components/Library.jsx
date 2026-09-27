@@ -1,24 +1,43 @@
+"use client"
 import WorkoutCard from './WorkoutCard';
+import { useState, useEffect } from 'react';
 
-const WORKOUTS_API = 'https://api.abcz.workers.dev/api/fitlog';
+// const WORKOUTS_API = 'https://api.abcz.workers.dev/api/fitlog';
+const WORKOUTS_API = 'https://api.api-store.workers.dev/api/fitlog';
 
-const Library = async () => {
-    let workouts = [];
-    let errorMsg = null;
+const Library = () => {
+    const [workouts, setWorkouts] = useState([]);
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    try {
-        const res = await fetch(WORKOUTS_API, {
-            next: { revalidate: 60 },
-        });
-
-        if (!res.ok) {
-            errorMsg = `Failed to load the workout library (${res.status} ${res.statusText}).`;
-        } else {
-            workouts = await res.json();
+    useEffect(() => {
+        async function fetchWorkouts() {
+            try {
+                const res = await fetch(WORKOUTS_API);
+                
+                if (!res.ok) {
+                    throw new Error(`Failed to load (${res.status})`);
+                }
+                
+                const data = await res.json();
+                setWorkouts(data);
+            } catch (error) {
+                setErrorMsg("Failed to load the workout library. Please try again later.");
+                console.error("Workout library fetch error:", error);
+            } finally {
+                setLoading(false);
+            }
         }
-    } catch (error) {
-        errorMsg = "An unexpected error occurred while loading the workout library.";
-        console.error("Workout library fetch error:", error);
+
+        fetchWorkouts();
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="container mx-auto py-8 bg-gray-700/20 rounded-lg border border-gray-800 text-center p-8">
+                <p className="text-gray-400">Loading workouts...</p>
+            </div>
+        );
     }
 
     if (errorMsg) {
